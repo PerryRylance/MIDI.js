@@ -23,6 +23,7 @@
 			var e = new MIDIControlEvent(MIDIControlEvent.NOTE_ON, root + semitones[i], 127);
 			
 			if(i > 0)
+				e.delta = file.timeDivision;		// Space events out by one quarter note (crotchet) each
 			
 			track.events.push(e);
 		}
@@ -32,29 +33,16 @@
 			var e = new MIDIControlEvent(MIDIControlEvent.NOTE_OFF, root + semitones[i], 127);
 			
 			if(i == 0)
+				e.delta = file.timeDivision * 4;	// Wait for one measure (bar) and then send all notes off
 			
 			track.events.push(e);
 		}
 		
 		// Write the file to a stream, and make it available for download
 		var stream = new MIDIStream();
-		
 		file.writeBytes(stream);
 		
-		var arrayBuffer = stream.toArrayBuffer();
-		
-		function _arrayBufferToBase64( buffer ) {
-			var binary = '';
-			var bytes = new Uint8Array( buffer );
-			var len = bytes.byteLength;
-			for (var i = 0; i < len; i++) {
-				binary += String.fromCharCode( bytes[ i ] );
-			}
-			return window.btoa( binary );
-		}
-		
-		var b64 = _arrayBufferToBase64(arrayBuffer);
-		var url = "data:audio/midi;base64," + b64;
+		var url = stream.toDataURL();
 		
 		var a = document.createElement("a");
 		a.innerHTML = "Click here to download";
