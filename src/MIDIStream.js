@@ -8,7 +8,7 @@ function MIDIStream(buffer)
 	}
 	else if(buffer instanceof ArrayBuffer)
 	{
-		var dv = new DataView(buffer);
+		this._dv = new DataView(buffer);
 	}
 	else
 		throw new Error("Input must be an instance of ArrayBuffer or omitted for write stream");
@@ -18,21 +18,21 @@ function MIDIStream(buffer)
 
 MIDIStream.prototype.readByte = function()
 {
-	var result = dv.getUint8(this.position);
+	var result = this._dv.getUint8(this.position);
 	this.position++;
 	return result;
 }
 
 MIDIStream.prototype.readShort = function()
 {
-	var result = dv.getUint16(this.position);
+	var result = this._dv.getUint16(this.position);
 	this.position += 2;
 	return result;
 }
 
 MIDIStream.prototype.readUint = function()
 {
-	var result = dv.getUint32(this.position);
+	var result = this._dv.getUint32(this.position);
 	this.position += 4;
 	return result;
 }
@@ -110,4 +110,25 @@ MIDIStream.prototype.toArrayBuffer = function()
 		dv.setUint8(i, this.write[i]);
 		
 	return buffer;
+}
+
+MIDIStream.prototype.toDataURL = function()
+{
+	if(!this.write)
+		throw new Error("This is not a write stream");
+	
+	var arrayBuffer = this.toArrayBuffer();
+	
+	function _arrayBufferToBase64( buffer ) {
+		var binary = '';
+		var bytes = new Uint8Array( buffer );
+		var len = bytes.byteLength;
+		for (var i = 0; i < len; i++) {
+			binary += String.fromCharCode( bytes[ i ] );
+		}
+		return window.btoa( binary );
+	}
+	
+	var b64 = _arrayBufferToBase64(arrayBuffer);
+	return "data:audio/midi;base64," + b64;
 }
