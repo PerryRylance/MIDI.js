@@ -59,7 +59,6 @@ var MIDIFile = (function() {
 	
 	MIDIFile.prototype.readBytes = function(stream)
 	{
-		this.dispose();
 		this.tracks = [];
 	
 		var trackCount = readHeader.call(this, stream);
