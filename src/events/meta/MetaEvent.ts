@@ -1,3 +1,4 @@
+import ParseError from "../../exceptions/ParseError";
 import Event, { EventType } from "../Event";
 
 export enum MetaEventType {
@@ -29,6 +30,6 @@ export default abstract class MetaEvent extends Event
 	protected assertByteLength(actual: number, expected: number)
 	{
 		if(actual !== expected)
-			throw new Error(`Expected length to be ${expected} bytes`);
+			throw new ParseError(`Expected length to be ${expected} bytes`);
 	}
 }
