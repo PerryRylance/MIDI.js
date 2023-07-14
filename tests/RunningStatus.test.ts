@@ -28,6 +28,7 @@ test("Parse C Major triad with running status", () => {
 
 	g = EventFactory.fromStream(stream, status) as NoteOnEvent;
 
+	expect(g).toBeInstanceOf(NoteOnEvent);
 	expect(g.channel).toBe(0);
 	expect(g.key).toBe(67);
 	expect(g.velocity).toBe(127);
