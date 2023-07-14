@@ -12,6 +12,7 @@ import CopyrightEvent from "../src/events/meta/CopyrightEvent";
 import CuePointEvent from "../src/events/meta/CuePointEvent";
 import EndOfTrackEvent from "../src/events/meta/EndOfTrackEvent";
 import InstrumentNameEvent from "../src/events/meta/InstrumentNameEvent";
+import KeySignatureEvent, { Quality } from "../src/events/meta/KeySignatureEvent";
 import LyricEvent from "../src/events/meta/LyricEvent";
 import MarkerEvent from "../src/events/meta/MarkerEvent";
 import PortPrefixEvent from "../src/events/meta/PortPrefixEvent";
@@ -20,6 +21,7 @@ import SequencerSpecificEvent from "../src/events/meta/SequencerSpecificEvent";
 import SetTempoEvent from "../src/events/meta/SetTempoEvent";
 import SmtpeOffsetEvent, { Rate } from "../src/events/meta/SmtpeOffsetEvent";
 import TextEvent from "../src/events/meta/TextEvent";
+import TimeSignatureEvent from "../src/events/meta/TimeSignatureEvent";
 import TrackNameEvent from "../src/events/meta/TrackNameEvent";
 import SysExEvent from "../src/events/sysex/SysExEvent";
 import WriteStream from "../src/streams/WriteStream";
@@ -166,6 +168,28 @@ test("Serialize port prefix event", () => {
 	event.port = 3;
 
 	expect(doesOutputMatchByteArray(event, ByteArrays.PORT_PREFIX)).toBeTruthy();
+
+});
+
+test("Serialize key signature event", () => {
+
+	const event = new KeySignatureEvent();
+	event.accidentals = 4;
+	event.quality = Quality.MAJOR;
+
+	expect(doesOutputMatchByteArray(event, ByteArrays.KEY_SIGNATURE)).toBeTruthy();
+
+});
+
+test("Serialize time signature event", () => {
+
+	const event = new TimeSignatureEvent();
+	event.numerator = 4;
+	event.denominator = 4;
+	event.ticksPerMetronomeClick = 24;
+	event.num32ndNotesPerBeat = 8;
+
+	expect(doesOutputMatchByteArray(event, ByteArrays.TIME_SIGNATURE)).toBeTruthy();
 
 });
 

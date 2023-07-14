@@ -4,7 +4,19 @@ import ControlEvent, { ControlEventType } from "./ControlEvent";
 
 export default class ChannelAftertouchEvent extends ControlEvent
 {
-	pressure: number = 127;
+	private _pressure: number = 127;
+
+	get pressure(): number
+	{
+		return this._pressure;
+	}
+
+	set pressure(value: number)
+	{
+		this.assertValidVelocityLike(value);
+
+		this._pressure = value;
+	}
 
 	readBytes(stream: ReadStream): void
 	{

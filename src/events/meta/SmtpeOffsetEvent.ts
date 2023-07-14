@@ -20,6 +20,9 @@ export default class SmtpeOffsetEvent extends MetaEvent
 	frames: number = 0;
 	subframes: number = 0;
 
+	// TODO: Private and test parameters please
+	// TODO: See spec http://www.somascape.org/midi/tech/mfile.html#:~:text=SMPTE%20Offset,-FF%2054%2005&text=ff%20is%20a%20byte%20specifying,prior%20to%20any%20MIDI%20events.
+
 	readBytes(stream: ReadStream)
 	{
 		this.assertByteLength(stream, stream.readByte(), 5);

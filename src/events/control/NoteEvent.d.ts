@@ -2,8 +2,12 @@ import ControlEvent from "./ControlEvent";
 import ReadStream from "../../streams/ReadStream";
 import WriteStream from "../../streams/WriteStream";
 export default abstract class NoteEvent extends ControlEvent {
-    key: number;
-    velocity: number;
+    private _key;
+    private _velocity;
+    get key(): number;
+    set key(value: number);
+    get velocity(): number;
+    set velocity(value: number);
     readBytes(stream: ReadStream): void;
     writeBytes(stream: WriteStream): void;
 }

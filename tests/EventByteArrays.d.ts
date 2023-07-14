@@ -12,6 +12,8 @@ declare const ByteArrays: {
     END_OF_TRACK: number[];
     CHANNEL_PREFIX: number[];
     PORT_PREFIX: number[];
+    KEY_SIGNATURE: number[];
+    TIME_SIGNATURE: number[];
     SEQUENCER_SPECIFIC: number[];
     SYSEX: number[];
     NOTE_ON: number[];

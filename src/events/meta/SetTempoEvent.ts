@@ -16,7 +16,14 @@ export default class SetTempoEvent extends MetaEvent
 
 	set bpm(value: number)
 	{
-		this.mspqn = Math.round(MICROSECONDS_PER_MINUTE / value);
+		const mspqn = Math.round(MICROSECONDS_PER_MINUTE / value);
+
+		this.assertNonZero(mspqn);
+
+		if(mspqn > 0xFFFFFF)
+			throw new RangeError("Microseconds-per-quarter-note exceeds maximum");
+
+		this.mspqn = mspqn;
 	}
 
 	readBytes(stream: ReadStream)

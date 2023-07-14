@@ -6,9 +6,20 @@ export declare enum EventType {
     META = 255
 }
 export default abstract class Event {
-    readonly delta: number;
+    private _delta;
     constructor(delta?: number);
     abstract readBytes(stream: ReadStream): void;
     protected abstract writeType(stream: WriteStream): void;
+    get delta(): number;
+    set delta(value: number);
     writeBytes(stream: WriteStream): void;
+    protected assertPositiveInteger(value: number): void;
+    protected assertValidDelta(value: number): void;
+    protected assertValidChannel(channel: number): void;
+    protected assertUnsignedAndBelow(value: number, max: number): void;
+    protected assertNonZero(value: number): void;
+    protected assertValidByte(value: number): void;
+    protected assertValidShort(value: number): void;
+    protected assertValidUint(value: number): void;
+    protected assertValidVlv(value: number): void;
 }

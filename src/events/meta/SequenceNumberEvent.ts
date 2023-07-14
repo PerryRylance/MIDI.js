@@ -5,7 +5,19 @@ import MetaEvent, { MetaEventType } from "./MetaEvent";
 
 export default class SequenceNumberEvent extends MetaEvent
 {
-	number: number = 0;
+	private _number: number = 0;
+
+	get number(): number
+	{
+		return this._number;
+	}
+
+	set number(value: number)
+	{
+		this.assertValidShort(value);
+
+		this._number = value;
+	}
 
 	readBytes(stream: ReadStream): void
 	{

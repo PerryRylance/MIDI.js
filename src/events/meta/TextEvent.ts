@@ -5,7 +5,19 @@ import MetaEvent, { MetaEventType } from "./MetaEvent";
 
 export default class TextEvent extends MetaEvent
 {
-	text: string = "";
+	private _text: string = "";
+
+	get text(): string
+	{
+		return this._text;
+	}
+
+	set text(value: string)
+	{
+		this.assertValidText(value);
+
+		this._text = value;
+	}
 
 	readBytes(stream: ReadStream): void
 	{
@@ -28,5 +40,14 @@ export default class TextEvent extends MetaEvent
 	protected getMetaType(): MetaEventType
 	{
 		return MetaEventType.TEXT;
+	}
+
+	private assertValidText(value: string): void
+	{
+		if(value.length > 255)
+			throw new RangeError("Text too long");
+		
+		if(!/^[\x00-\xFF]*$/.test(value))
+			throw new RangeError("One or more characters are not valid ASCII");
 	}
 }

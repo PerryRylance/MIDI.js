@@ -28,6 +28,8 @@ import ChannelAftertouchEvent from "../src/events/control/ChannelAftertouchEvent
 import PitchWheelEvent from "../src/events/control/PitchWheelEvent";
 
 import { getReadStreamFromBytes } from "./ReadStreamUtils";
+import KeySignatureEvent, { Quality } from "../src/events/meta/KeySignatureEvent";
+import TimeSignatureEvent from "../src/events/meta/TimeSignatureEvent";
 
 const getEventFromByteArray = <T>(bytes: number[]): T => {
 
@@ -159,6 +161,28 @@ test("Read port prefix event", () => {
 
 	expect(event).toBeInstanceOf(PortPrefixEvent);
 	expect(event.port).toBe(3);
+
+});
+
+test("Read key signature event", () => {
+
+	const event = getEventFromByteArray<KeySignatureEvent>(EventByteArrays.KEY_SIGNATURE);
+
+	expect(event).toBeInstanceOf(KeySignatureEvent);
+	expect(event.accidentals).toBe(4);
+	expect(event.quality).toBe(Quality.MAJOR);
+
+});
+
+test("Read time signature event", () => {
+
+	const event = getEventFromByteArray<TimeSignatureEvent>(EventByteArrays.TIME_SIGNATURE);
+
+	expect(event).toBeInstanceOf(TimeSignatureEvent);
+	expect(event.numerator).toBe(4);
+	expect(event.denominator).toBe(4);
+	expect(event.ticksPerMetronomeClick).toBe(24);
+	expect(event.num32ndNotesPerBeat).toBe(8);
 
 });
 

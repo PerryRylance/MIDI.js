@@ -19,7 +19,7 @@ export enum ControlEventType {
 
 export default abstract class ControlEvent extends Event
 {
-	channel: number = 0;
+	private _channel: number = 0;
 
 	constructor(delta: number = 0, channel: number = 0)
 	{
@@ -30,8 +30,32 @@ export default abstract class ControlEvent extends Event
 
 	protected abstract getTypeHibyte(): number;
 
+	get channel(): number
+	{
+		return this._channel;
+	}
+
+	set channel(value: number)
+	{
+		this.assertValidChannel(value);
+
+		this._channel = value;
+	}
+
 	protected writeType(stream: WriteStream): void
 	{
 		stream.writeByte( this.getTypeHibyte() | this.channel );
+	}
+
+	protected assertValidKey(value: number)
+	{
+		this.assertPositiveInteger(value);
+		this.assertUnsignedAndBelow(value, 0x7F);
+	}
+
+	protected assertValidVelocityLike(value: number)
+	{
+		this.assertPositiveInteger(value);
+		this.assertUnsignedAndBelow(value, 0x7F);
 	}
 }

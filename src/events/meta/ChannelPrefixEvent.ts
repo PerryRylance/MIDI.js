@@ -5,7 +5,19 @@ import MetaEvent, { MetaEventType } from "./MetaEvent";
 
 export default class ChannelPrefixEvent extends MetaEvent
 {
-	channel: number = 0;
+	private _channel: number = 0;
+
+	get channel(): number
+	{
+		return this._channel;
+	}
+
+	set channel(value: number)
+	{
+		this.assertValidChannel(value);
+
+		this._channel = value;
+	}
 
 	readBytes(stream: ReadStream): void
 	{
