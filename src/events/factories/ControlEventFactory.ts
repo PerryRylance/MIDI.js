@@ -72,7 +72,7 @@ export default class ControlEventFactory
 				break;
 			
 			default:
-				throw new ParseError("Unknown control event type 0x" + (type as number).toString(16));
+				throw new ParseError(stream, "Unknown control event type 0x" + (type as number).toString(16));
 		}
 
 		result.readBytes(stream);

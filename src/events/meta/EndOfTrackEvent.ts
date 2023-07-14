@@ -6,6 +6,6 @@ export default class EndOfTrackEvent extends MetaEvent
 {
 	readBytes(stream: ReadStream): void
 	{
-		this.assertByteLength(stream.readByte(), 0);
+		this.assertByteLength(stream, stream.readByte(), 0);
 	}
 }

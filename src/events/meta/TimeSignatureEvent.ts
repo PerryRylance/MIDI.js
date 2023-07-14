@@ -10,7 +10,7 @@ export default class TimeSignatureEvent extends MetaEvent
 
 	readBytes(stream: ReadStream)
 	{
-		this.assertByteLength(stream.readByte(), 4);
+		this.assertByteLength(stream, stream.readByte(), 4);
 		
 		this.numerator = stream.readByte();
 		this.denominator = stream.readByte();

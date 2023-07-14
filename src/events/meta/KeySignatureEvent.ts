@@ -16,7 +16,7 @@ export default class KeySignatureEvent extends MetaEvent
 
 	readBytes(stream: ReadStream): void
 	{
-		this.assertByteLength(stream.readByte(), 2);
+		this.assertByteLength(stream, stream.readByte(), 2);
 
 		this.accidentals = stream.readByte();
 		this.quality = stream.readByte();

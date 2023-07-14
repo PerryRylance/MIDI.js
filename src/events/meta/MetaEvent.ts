@@ -1,4 +1,5 @@
 import ParseError from "../../exceptions/ParseError";
+import ReadStream from "../../streams/ReadStream";
 import Event, { EventType } from "../Event";
 
 export enum MetaEventType {
@@ -27,9 +28,10 @@ export default abstract class MetaEvent extends Event
 		super(EventType.META, delta);
 	}
 
-	protected assertByteLength(actual: number, expected: number)
+	// TODO: Can probably drop actual and readByte from stream
+	protected assertByteLength(stream: ReadStream, actual: number, expected: number)
 	{
 		if(actual !== expected)
-			throw new ParseError(`Expected length to be ${expected} bytes`);
+			throw new ParseError(stream, `Expected length to be ${expected} bytes`);
 	}
 }

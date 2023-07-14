@@ -20,7 +20,7 @@ export default class SetTempoEvent extends MetaEvent
 
 	readBytes(stream: ReadStream)
 	{
-		this.assertByteLength(stream.readByte(), 3);
+		this.assertByteLength(stream, stream.readByte(), 3);
 
 		const a = stream.readByte() & 0xFF;
 		const b = stream.readByte() & 0xFF;

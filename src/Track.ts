@@ -14,7 +14,7 @@ export default class Track
 	readBytes(stream: ReadStream)
 	{
 		if(stream.readUint() !== MTrk)
-			throw new ParseError("Expected MTrk");
+			throw new ParseError(stream, "Expected MTrk");
 		
 		const chunkSize = stream.readUint();
 		const status: StatusBytes = [0, 0];
@@ -25,7 +25,7 @@ export default class Track
 		while(bytes < chunkSize)
 		{
 			if(eot)
-				throw new ParseError("Unexpected end of track event");
+				throw new ParseError(stream, "Unexpected end of track event");
 
 			cursor	= stream.getPosition();
 			event	= EventFactory.fromStream(stream, status);
@@ -37,9 +37,9 @@ export default class Track
 		}
 
 		if(!eot)
-			throw new ParseError("Expected end of track event");
+			throw new ParseError(stream, "Expected end of track event");
 		
 		if(bytes < chunkSize)
-			throw new ParseError("Expected bytes read to be equal to specified chunk size");
+			throw new ParseError(stream, "Expected bytes read to be equal to specified chunk size");
 	}
 }

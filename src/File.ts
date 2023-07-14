@@ -19,7 +19,7 @@ export default class File
 	private readHeader(stream: ReadStream): number
 	{
 		if(stream.readUint() !== MThd)
-			throw new ParseError("Expected MThd");
+			throw new ParseError(stream, "Expected MThd");
 		
 		const size			= stream.readUint();
 

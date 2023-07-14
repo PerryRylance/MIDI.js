@@ -21,7 +21,7 @@ export default class SmtpeOffsetEvent extends MetaEvent
 
 	readBytes(stream: ReadStream)
 	{
-		this.assertByteLength(stream.readByte(), 5);
+		this.assertByteLength(stream, stream.readByte(), 5);
 		
 		// NB: The fourth byte specifies the hours of the SMPTE time and the frame rate
 		// NB: This byte has the binary format "0sshhhhh". The top bit is zero as it is reserved according to the MIDI time code specifications.
@@ -42,7 +42,7 @@ export default class SmtpeOffsetEvent extends MetaEvent
 				break;
 			
 			default:
-				throw new ParseError("Invalid SMTPE rate");
+				throw new ParseError(stream, "Invalid SMTPE rate");
 		}
 
 		this.minutes	= stream.readByte();

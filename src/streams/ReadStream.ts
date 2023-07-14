@@ -15,7 +15,7 @@ export default class ReadStream extends Stream
 	readByte()
 	{
 		if(this.position >= this.dataView.byteLength)
-			throw new ParseError("Unexpected end of stream");
+			throw new ParseError(this, "Unexpected end of stream");
 
 		const result = this.dataView!.getUint8(this.position);
 		this.position++;
@@ -25,7 +25,7 @@ export default class ReadStream extends Stream
 	readShort()
 	{
 		if(this.position >= this.dataView.byteLength - 1)
-			throw new ParseError("Unexpected end of stream");
+			throw new ParseError(this, "Unexpected end of stream");
 
 		const result = this.dataView!.getUint16(this.position);
 		this.position += 2;
@@ -35,7 +35,7 @@ export default class ReadStream extends Stream
 	readUint()
 	{
 		if(this.position >= this.dataView.byteLength - 3)
-			throw new ParseError("Unexpected end of stream");
+			throw new ParseError(this, "Unexpected end of stream");
 
 		const result = this.dataView!.getUint32(this.position);
 		this.position += 4;
@@ -59,7 +59,7 @@ export default class ReadStream extends Stream
 		}catch(e) {
 
 			if(e instanceof RangeError)
-				throw new ParseError("Unexpected end of stream");
+				throw new ParseError(this, "Unexpected end of stream");
 			
 			throw e;
 

@@ -8,7 +8,7 @@ export default class SequenceNumberEvent extends MetaEvent
 
 	readBytes(stream: ReadStream): void
 	{
-		this.assertByteLength(stream.readByte(), 2);
+		this.assertByteLength(stream, stream.readByte(), 2);
 
 		this.number = stream.readShort();
 	}

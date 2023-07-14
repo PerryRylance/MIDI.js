@@ -8,7 +8,7 @@ export default class PortPrefixEvent extends MetaEvent
 
 	readBytes(stream: ReadStream): void
 	{
-		this.assertByteLength(stream.readByte(), 1);
+		this.assertByteLength(stream, stream.readByte(), 1);
 
 		this.port = stream.readByte();
 	}

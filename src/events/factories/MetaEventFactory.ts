@@ -15,6 +15,8 @@ import LyricEvent from "../meta/LyricEvent";
 import MarkerEvent from "../meta/MarkerEvent";
 import CuePointEvent from "../meta/CuePointEvent";
 import ParseError from "../../exceptions/ParseError";
+import TimeSignatureEvent from "../meta/TimeSignatureEvent";
+import KeySignatureEvent from "../meta/KeySignatureEvent";
 
 export default class MetaEventFactory
 {
@@ -25,6 +27,10 @@ export default class MetaEventFactory
 
 		switch(type)
 		{
+			case MetaEventType.SEQUENCE_NUMBER:
+				result = new SequenceNumberEvent(delta);
+				break;
+
 			case MetaEventType.TEXT:
 				result = new TextEvent(delta);
 				break;
@@ -52,7 +58,19 @@ export default class MetaEventFactory
 			case MetaEventType.CUE_POINT:
 				result = new CuePointEvent(delta);
 				break;
+			
+			case MetaEventType.CHANNEL_PREFIX:
+				result = new ChannelPrefixEvent(delta);
+				break;
 		
+			case MetaEventType.PORT_PREFIX:
+				result = new PortPrefixEvent(delta);
+				break;
+			
+			case MetaEventType.END_OF_TRACK:
+				result = new EndOfTrackEvent(delta);
+				break;
+
 			case MetaEventType.SET_TEMPO:
 				result = new SetTempoEvent(delta);
 				break;
@@ -61,20 +79,12 @@ export default class MetaEventFactory
 				result = new SmtpeOffsetEvent(delta);
 				break;
 			
-			case MetaEventType.SEQUENCE_NUMBER:
-				result = new SequenceNumberEvent(delta);
+			case MetaEventType.TIME_SIGNATURE:
+				result = new TimeSignatureEvent(delta);
 				break;
 			
-			case MetaEventType.END_OF_TRACK:
-				result = new EndOfTrackEvent(delta);
-				break;
-			
-			case MetaEventType.CHANNEL_PREFIX:
-				result = new ChannelPrefixEvent(delta);
-				break;
-			
-			case MetaEventType.PORT_PREFIX:
-				result = new PortPrefixEvent(delta);
+			case MetaEventType.KEY_SIGNATURE:
+				result = new KeySignatureEvent(delta);
 				break;
 			
 			case MetaEventType.SEQUENCER_SPECIFIC:
@@ -82,7 +92,7 @@ export default class MetaEventFactory
 				break;
 
 			default:
-				throw new ParseError("Invalid meta event type 0x" + type.toString(16));
+				throw new ParseError(stream, "Invalid meta event type 0x" + type.toString(16));
 		}
 
 		result.readBytes(stream);
