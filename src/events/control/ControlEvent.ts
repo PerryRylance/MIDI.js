@@ -22,7 +22,7 @@ export default abstract class ControlEvent extends Event
 
 	constructor(delta: number = 0, channel: number = 0)
 	{
-		super(EventType.CONTROL, delta);
+		super(delta);
 
 		this.channel = channel;
 	}

@@ -9,7 +9,6 @@ type SysExManufacturer = DeviceManufacturer | UniversalDevices;
 export default class SysExEvent extends Event {
     manufacturer: SysExManufacturer;
     bytes: Uint8Array;
-    constructor(delta?: number);
     readBytes(stream: ReadStream): void;
 }
 export {};

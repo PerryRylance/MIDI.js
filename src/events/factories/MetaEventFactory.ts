@@ -92,7 +92,7 @@ export default class MetaEventFactory
 				break;
 
 			default:
-				throw new ParseError(stream, "Invalid meta event type 0x" + type.toString(16));
+				throw new ParseError(stream, "Invalid meta event type 0x" + (type as number).toString(16));
 		}
 
 		result.readBytes(stream);

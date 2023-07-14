@@ -19,6 +19,5 @@ export declare enum MetaEventType {
     SEQUENCER_SPECIFIC = 127
 }
 export default abstract class MetaEvent extends Event {
-    constructor(delta?: number);
     protected assertByteLength(stream: ReadStream, actual: number, expected: number): void;
 }

@@ -14,11 +14,6 @@ export default class SysExEvent extends Event
 	manufacturer: SysExManufacturer = DeviceManufacturer.AKAI;
 	bytes: Uint8Array = new Uint8Array(); // NB: Payload not including 0xF7 terminator
 
-	constructor(delta: number = 0)
-	{
-		super(EventType.SYSEX, delta);
-	}
-
 	readBytes(stream: ReadStream): void
 	{
 		const buffer: number[] = [];

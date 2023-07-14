@@ -23,11 +23,6 @@ export enum MetaEventType {
 
 export default abstract class MetaEvent extends Event
 {
-	constructor(delta: number = 0)
-	{
-		super(EventType.META, delta);
-	}
-
 	// TODO: Can probably drop actual and readByte from stream
 	protected assertByteLength(stream: ReadStream, actual: number, expected: number)
 	{

@@ -5,8 +5,7 @@ export declare enum EventType {
     META = 255
 }
 export default abstract class Event {
-    readonly type: EventType;
     readonly delta: number;
-    constructor(type: EventType, delta?: number);
+    constructor(delta?: number);
     abstract readBytes(stream: ReadStream): void;
 }
