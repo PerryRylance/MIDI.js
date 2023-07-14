@@ -1,5 +1,5 @@
-import ReadStream from "../../ReadStream";
-import { StatusBytes } from "../../StatusBytes";
+import ReadStream from "../../streams/ReadStream";
+
 import ControlEvent from "./ControlEvent";
 
 export default class NoteOffEvent extends ControlEvent

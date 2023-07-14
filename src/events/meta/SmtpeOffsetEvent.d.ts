@@ -1,4 +1,4 @@
-import ReadStream from "../../ReadStream";
+import ReadStream from "../../streams/ReadStream";
 import MetaEvent from "./MetaEvent";
 export default class SmtpeOffsetEvent extends MetaEvent {
     private rate;

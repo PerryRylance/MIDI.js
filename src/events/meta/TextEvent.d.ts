@@ -1,6 +1,6 @@
-import ReadStream from "../../ReadStream";
+import ReadStream from "../../streams/ReadStream";
 import MetaEvent from "./MetaEvent";
 export default class TextEvent extends MetaEvent {
-    private text;
+    text: string;
     readBytes(stream: ReadStream): void;
 }

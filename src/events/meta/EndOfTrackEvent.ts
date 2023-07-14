@@ -1,5 +1,5 @@
-import ReadStream from "../../ReadStream";
-import { StatusBytes } from "../../StatusBytes";
+import ReadStream from "../../streams/ReadStream";
+
 import MetaEvent, { MetaEventType } from "./MetaEvent";
 
 export default class EndOfTrackEvent extends MetaEvent

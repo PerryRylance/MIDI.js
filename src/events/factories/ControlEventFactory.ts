@@ -1,14 +1,14 @@
-import ReadStream from "./ReadStream";
-import { StatusBytes } from "./StatusBytes";
-import ControlEvent from "./events/control/ControlEvent";
-import ParseError from "./exceptions/ParseError";
-import NoteOnEvent from "./events/control/NoteOnEvent";
-import NoteOffEvent from "./events/control/NoteOffEvent";
-import AftertouchEvent from "./events/control/AftertouchEvent";
-import ControllerEvent from "./events/control/ControllerEvent";
-import ChannelAftertouchEvent from "./events/control/ChannelAftertouchEvent";
-import ProgramChangeEvent from "./events/control/ProgramChangeEvent";
-import PitchWheelEvent from "./events/control/PitchWheelEvent";
+import ReadStream from "../../streams/ReadStream";
+import { StatusBytes } from "../../streams/StatusBytes";
+import ControlEvent from "../control/ControlEvent";
+import ParseError from "../../exceptions/ParseError";
+import NoteOnEvent from "../control/NoteOnEvent";
+import NoteOffEvent from "../control/NoteOffEvent";
+import AftertouchEvent from "../control/AftertouchEvent";
+import ControllerEvent from "../control/ControllerEvent";
+import ChannelAftertouchEvent from "../control/ChannelAftertouchEvent";
+import ProgramChangeEvent from "../control/ProgramChangeEvent";
+import PitchWheelEvent from "../control/PitchWheelEvent";
 
 enum ControlEventType {
 	NOTE_OFF			= 0x80,

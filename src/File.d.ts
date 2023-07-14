@@ -1,4 +1,4 @@
-import ReadStream from "./ReadStream";
+import ReadStream from "./streams/ReadStream";
 export default class File {
     private tracks;
     private format;

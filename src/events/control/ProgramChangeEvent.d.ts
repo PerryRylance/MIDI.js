@@ -1,4 +1,4 @@
-import ReadStream from "../../ReadStream";
+import ReadStream from "../../streams/ReadStream";
 import ControlEvent from "./ControlEvent";
 export declare enum ProgramType {
     ACOUSTIC_GRAND_PIANO = 0,

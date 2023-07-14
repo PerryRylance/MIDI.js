@@ -1,6 +1,5 @@
-import { StatusBytes } from "../../StatusBytes";
 import MetaEvent from "./MetaEvent";
-import ReadStream from "../../ReadStream";
+import ReadStream from "../../streams/ReadStream";
 
 export default class TimeSignatureEvent extends MetaEvent
 {

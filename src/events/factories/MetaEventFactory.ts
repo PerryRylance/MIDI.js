@@ -1,25 +1,24 @@
-import Event from "./events/Event";
-import ReadStream from "./ReadStream";
-import { StatusBytes } from "./StatusBytes";
-import MetaEvent, { MetaEventType } from "./events/meta/MetaEvent";
-import TextEvent from "./events/meta/TextEvent";
-import SetTempoEvent from "./events/meta/SetTempoEvent";
-import SmtpeOffsetEvent from "./events/meta/SmtpeOffsetEvent";
-import SequenceNumberEvent from "./events/meta/SequenceNumberEvent";
-import EndOfTrackEvent from "./events/meta/EndOfTrackEvent";
-import ChannelPrefixEvent from "./events/meta/ChannelPrefixEvent";
-import PortPrefixEvent from "./events/meta/PortPrefixEvent";
-import SequencerSpecificEvent from "./events/meta/SequencerSpecificEvent";
-import CopyrightEvent from "./events/meta/CopyrightEvent";
-import TrackNameEvent from "./events/meta/TrackNameEvent";
-import InstrumentNameEvent from "./events/meta/InstrumentNameEvent";
-import LyricEvent from "./events/meta/LyricEvent";
-import MarkerEvent from "./events/meta/MarkerEvent";
-import CuePointEvent from "./events/meta/CuePointEvent";
+import ReadStream from "../../streams/ReadStream";
+
+import MetaEvent, { MetaEventType } from "../meta/MetaEvent";
+import TextEvent from "../meta/TextEvent";
+import SetTempoEvent from "../meta/SetTempoEvent";
+import SmtpeOffsetEvent from "../meta/SmtpeOffsetEvent";
+import SequenceNumberEvent from "../meta/SequenceNumberEvent";
+import EndOfTrackEvent from "../meta/EndOfTrackEvent";
+import ChannelPrefixEvent from "../meta/ChannelPrefixEvent";
+import PortPrefixEvent from "../meta/PortPrefixEvent";
+import SequencerSpecificEvent from "../meta/SequencerSpecificEvent";
+import CopyrightEvent from "../meta/CopyrightEvent";
+import TrackNameEvent from "../meta/TrackNameEvent";
+import InstrumentNameEvent from "../meta/InstrumentNameEvent";
+import LyricEvent from "../meta/LyricEvent";
+import MarkerEvent from "../meta/MarkerEvent";
+import CuePointEvent from "../meta/CuePointEvent";
 
 export default class MetaEventFactory
 {
-	static fromStream(stream: ReadStream, delta: number, status: StatusBytes): MetaEvent
+	static fromStream(stream: ReadStream, delta: number): MetaEvent
 	{
 		const type: MetaEventType = stream.readByte();
 		let result: MetaEvent;

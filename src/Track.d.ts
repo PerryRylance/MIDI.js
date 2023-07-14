@@ -1,4 +1,4 @@
-import ReadStream from "./ReadStream";
+import ReadStream from "./streams/ReadStream";
 import Event from "./events/Event";
 export default class Track {
     events: Event[];

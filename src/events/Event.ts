@@ -1,5 +1,4 @@
-import { StatusBytes } from "../StatusBytes";
-import ReadStream from "../ReadStream";
+import ReadStream from "../streams/ReadStream";
 
 export enum EventType {
 	CONTROL = 0,

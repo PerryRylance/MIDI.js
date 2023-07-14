@@ -1,5 +1,5 @@
 import MetaEvent from "./MetaEvent";
-import ReadStream from "../../ReadStream";
+import ReadStream from "../../streams/ReadStream";
 export default class SetTempoEvent extends MetaEvent {
     private mspqn;
     get bpm(): number;

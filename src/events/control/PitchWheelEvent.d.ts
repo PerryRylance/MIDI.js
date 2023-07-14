@@ -1,4 +1,4 @@
-import ReadStream from "../../ReadStream";
+import ReadStream from "../../streams/ReadStream";
 import ControlEvent from "./ControlEvent";
 export default class PitchWheelEvent extends ControlEvent {
     private value;

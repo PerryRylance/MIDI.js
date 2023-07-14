@@ -1,5 +1,5 @@
 import MetaEvent from "./MetaEvent";
-import ReadStream from "../../ReadStream";
+import ReadStream from "../../streams/ReadStream";
 export default class TimeSignatureEvent extends MetaEvent {
     private numerator;
     private denominator;

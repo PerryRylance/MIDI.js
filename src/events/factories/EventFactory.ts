@@ -1,10 +1,11 @@
-import Event, { EventType } from "./events/Event";
-import ReadStream from "./ReadStream";
-import { StatusBytes } from "./StatusBytes";
+import Event, { EventType } from "../Event";
+import ReadStream from "../../streams/ReadStream";
+import { StatusBytes } from "../../streams/StatusBytes";
+
 import MetaEventFactory from "./MetaEventFactory";
 import ControlEventFactory from "./ControlEventFactory";
-import SysExEvent from "./events/sysex/SysExEvent";
-import AuthorizationSysExEvent from "./events/sysex/AuthorizationSysExEvent";
+import SysExEvent from "../sysex/SysExEvent";
+import AuthorizationSysExEvent from "../sysex/AuthorizationSysExEvent";
 
 export default class EventFactory
 {
@@ -19,24 +20,26 @@ export default class EventFactory
 		switch(type)
 		{
 			case EventType.META:
-				result = MetaEventFactory.fromStream(stream, delta, status);
+				result = MetaEventFactory.fromStream(stream, delta);
 				break;
 			
 			case EventType.SYSEX:
 				result = new SysExEvent(delta);
+				result.readBytes(stream);
 				break;
 
 			case EventType.AUTHORIZATION_SYSEX:
 				result = new AuthorizationSysExEvent(delta);
+				result.readBytes(stream);
 				break;
 			
 			default:
 				result = ControlEventFactory.fromStream(stream, type, delta, status);
 				break;
 		}
-		
-		result.readBytes(stream);
 
+		// TODO: Do we need to reset status bytes if not on a control event?
+		
 		return result;
 	}
 }

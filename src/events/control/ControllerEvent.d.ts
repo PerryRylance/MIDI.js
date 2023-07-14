@@ -1,4 +1,4 @@
-import ReadStream from "../../ReadStream";
+import ReadStream from "../../streams/ReadStream";
 import ControlEvent from "./ControlEvent";
 declare enum ControllerType {
     BANK_SELECT_COARSE = 0,

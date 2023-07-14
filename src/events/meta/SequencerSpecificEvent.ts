@@ -1,5 +1,5 @@
-import ReadStream from "../../ReadStream";
-import { StatusBytes } from "../../StatusBytes";
+import ReadStream from "../../streams/ReadStream";
+
 import MetaEvent from "./MetaEvent";
 
 // TODO: Implement ArbitraryLengthEvent please, this is repeated. Need to turn ArbitraryLengthEvent into a mixin. Reason is that this is a MetaEvent but the code is used in SysEx events too

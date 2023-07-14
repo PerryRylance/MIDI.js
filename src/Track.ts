@@ -1,9 +1,8 @@
-import ReadStream from "./ReadStream";
+import ReadStream from "./streams/ReadStream";
 import ParseError from "./exceptions/ParseError";
-import { StatusBytes } from "./StatusBytes";
+import { StatusBytes } from "./streams/StatusBytes";
 import Event from "./events/Event";
-import EventFactory from "./EventFactory";
-import MetaEvent from "./events/meta/MetaEvent";
+import EventFactory from "./events/factories/EventFactory";
 import EndOfTrackEvent from "./events/meta/EndOfTrackEvent";
 
 const MTrk		= 0x4D54726B;

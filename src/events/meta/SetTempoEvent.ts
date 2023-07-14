@@ -1,6 +1,6 @@
 import MetaEvent from "./MetaEvent";
-import ReadStream from "../../ReadStream";
-import { StatusBytes } from "../../StatusBytes";
+import ReadStream from "../../streams/ReadStream";
+
 
 const MICROSECONDS_PER_MINUTE = 60000000.0;
 
