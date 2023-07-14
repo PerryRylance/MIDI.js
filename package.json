@@ -1,6 +1,7 @@
 {
 	"name": "midi.js",
 	"author": "Perry Rylance",
+	"license": "CC-BY-3.0",
 	"scripts": {
 		"dev": "npx tsc --watch",
 		"test": "jest"

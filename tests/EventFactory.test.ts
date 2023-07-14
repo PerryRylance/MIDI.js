@@ -27,13 +27,7 @@ import ProgramChangeEvent, { ProgramType } from "../src/events/control/ProgramCh
 import ChannelAftertouchEvent from "../src/events/control/ChannelAftertouchEvent";
 import PitchWheelEvent from "../src/events/control/PitchWheelEvent";
 
-const getReadStreamFromBytes = (bytes: number[]): ReadStream =>
-{
-	const arr		= Int8Array.from(bytes);
-	const stream	= new ReadStream(arr.buffer);
-
-	return stream;
-};
+import { getReadStreamFromBytes } from "./ReadStreamUtils";
 
 const getEventFromByteArray = <T>(bytes: number[]): T => {
 

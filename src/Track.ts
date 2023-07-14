@@ -6,7 +6,6 @@ import EventFactory from "./events/factories/EventFactory";
 import EndOfTrackEvent from "./events/meta/EndOfTrackEvent";
 
 const MTrk		= 0x4D54726B;
-const trackEnd	= 0x00FF2F00;
 
 export default class Track
 {

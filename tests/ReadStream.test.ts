@@ -76,6 +76,7 @@ test("Reads VLV", () => {
 
 });
 
+// TODO: Move elsewhere
 test("Reads test file", () => {
 
 	const fs		= require("fs");

@@ -21,6 +21,7 @@ declare const ByteArrays: {
     PROGRAM_CHANGE: number[];
     CHANNEL_AFTERTOUCH: number[];
     PITCH_WHEEL: number[];
+    RUNNING_C_MAJOR_TRIAD: number[];
     INVALID_TEXT: number[];
     INVALID_META_EVENT_TYPE: number[];
 };
