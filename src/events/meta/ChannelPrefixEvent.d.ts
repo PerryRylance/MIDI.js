@@ -1,6 +1,6 @@
 import ReadStream from "../../streams/ReadStream";
 import MetaEvent from "./MetaEvent";
 export default class ChannelPrefixEvent extends MetaEvent {
-    private channel;
+    channel: number;
     readBytes(stream: ReadStream): void;
 }

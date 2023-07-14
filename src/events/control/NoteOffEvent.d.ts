@@ -1,7 +1,7 @@
 import ReadStream from "../../streams/ReadStream";
 import ControlEvent from "./ControlEvent";
 export default class NoteOffEvent extends ControlEvent {
-    private key;
-    private velocity;
+    key: number;
+    velocity: number;
     readBytes(stream: ReadStream): void;
 }

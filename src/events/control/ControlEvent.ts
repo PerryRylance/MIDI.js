@@ -18,7 +18,7 @@ export enum ControlEventType {
 
 export default abstract class ControlEvent extends Event
 {
-	protected channel: number = 0;
+	channel: number = 0;
 
 	constructor(delta: number = 0, channel: number = 0)
 	{

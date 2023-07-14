@@ -10,7 +10,7 @@ export default class SetTempoEvent extends MetaEvent
 
 	get bpm()
 	{
-		return this.mspqn * MICROSECONDS_PER_MINUTE;
+		return MICROSECONDS_PER_MINUTE / this.mspqn;
 	}
 
 	set bpm(value: number)

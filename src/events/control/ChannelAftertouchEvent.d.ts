@@ -1,6 +1,6 @@
 import ReadStream from "../../streams/ReadStream";
 import ControlEvent from "./ControlEvent";
 export default class ChannelAftertouchEvent extends ControlEvent {
-    private pressure;
+    pressure: number;
     readBytes(stream: ReadStream): void;
 }

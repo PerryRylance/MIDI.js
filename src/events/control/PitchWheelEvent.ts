@@ -4,7 +4,7 @@ import ParseError from "../../exceptions/ParseError";
 
 export default class PitchWheelEvent extends ControlEvent
 {
-	private value: number = 0x2000; // NB: Value as a 14-bit number. Signed, but without any sign bit. This value is zero.
+	value: number = 0x2000; // NB: Value as a 14-bit number. Signed, but without any sign bit. This value is zero.
 
 	readBytes(stream: ReadStream): void
 	{
@@ -14,7 +14,7 @@ export default class PitchWheelEvent extends ControlEvent
 		if(first & 0x80)
 			throw new ParseError("Expected first bit of first byte to be zero");
 
-		this.value = ((first & 0x7F) << 7) | (second & 0x7F);
+		this.value = ((second & 0x7F) << 7) | (first & 0x7F);
 	}
 
 	get amount(): number

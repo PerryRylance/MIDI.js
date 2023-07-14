@@ -1,7 +1,7 @@
 import ReadStream from "../../streams/ReadStream";
 import ControlEvent from "./ControlEvent";
 export default class AftertouchEvent extends ControlEvent {
-    private key;
-    private pressure;
+    key: number;
+    pressure: number;
     readBytes(stream: ReadStream): void;
 }

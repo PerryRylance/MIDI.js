@@ -5,7 +5,6 @@ import { StatusBytes } from "../../streams/StatusBytes";
 import MetaEventFactory from "./MetaEventFactory";
 import ControlEventFactory from "./ControlEventFactory";
 import SysExEvent from "../sysex/SysExEvent";
-import AuthorizationSysExEvent from "../sysex/AuthorizationSysExEvent";
 
 export default class EventFactory
 {
@@ -28,11 +27,6 @@ export default class EventFactory
 				result.readBytes(stream);
 				break;
 
-			case EventType.AUTHORIZATION_SYSEX:
-				result = new AuthorizationSysExEvent(delta);
-				result.readBytes(stream);
-				break;
-			
 			default:
 				result = ControlEventFactory.fromStream(stream, type, delta, status);
 				break;

@@ -4,7 +4,7 @@ import MetaEvent, { MetaEventType } from "./MetaEvent";
 
 export default class SequenceNumberEvent extends MetaEvent
 {
-	private number: number = 0;
+	number: number = 0;
 
 	readBytes(stream: ReadStream): void
 	{

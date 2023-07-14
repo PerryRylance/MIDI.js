@@ -1,7 +1,7 @@
 import ReadStream from "../../streams/ReadStream";
 import ControlEvent from "./ControlEvent";
 
-enum ControllerType
+export enum ControllerType
 {
 	BANK_SELECT_COARSE                  = 0x00,
 	MODULATION_WHEEL_COARSE             = 0x01,

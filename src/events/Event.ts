@@ -3,7 +3,6 @@ import ReadStream from "../streams/ReadStream";
 export enum EventType {
 	CONTROL = 0,
 	SYSEX = 0xF0,
-	AUTHORIZATION_SYSEX = 0xF7,
 	META = 0xFF
 };
 

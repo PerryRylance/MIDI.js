@@ -4,11 +4,12 @@ import ControlEvent from "./ControlEvent";
 
 export default class AftertouchEvent extends ControlEvent
 {
-	private key: number = 60;
-	private pressure: number = 127;
+	key: number = 60;
+	pressure: number = 127;
 
 	readBytes(stream: ReadStream): void
 	{
-		
+		this.key = stream.readByte();
+		this.pressure = stream.readByte();
 	}
 }

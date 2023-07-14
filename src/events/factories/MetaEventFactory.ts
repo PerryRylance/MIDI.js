@@ -1,5 +1,4 @@
 import ReadStream from "../../streams/ReadStream";
-
 import MetaEvent, { MetaEventType } from "../meta/MetaEvent";
 import TextEvent from "../meta/TextEvent";
 import SetTempoEvent from "../meta/SetTempoEvent";
@@ -15,6 +14,7 @@ import InstrumentNameEvent from "../meta/InstrumentNameEvent";
 import LyricEvent from "../meta/LyricEvent";
 import MarkerEvent from "../meta/MarkerEvent";
 import CuePointEvent from "../meta/CuePointEvent";
+import ParseError from "../../exceptions/ParseError";
 
 export default class MetaEventFactory
 {
@@ -82,7 +82,7 @@ export default class MetaEventFactory
 				break;
 
 			default:
-				throw new Error("Unknown meta event type 0x" + type.toString(16));
+				throw new ParseError("Invalid meta event type 0x" + type.toString(16));
 		}
 
 		result.readBytes(stream);

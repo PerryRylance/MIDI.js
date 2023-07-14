@@ -4,7 +4,7 @@ import MetaEvent from "./MetaEvent";
 
 export default class ChannelPrefixEvent extends MetaEvent
 {
-	private channel: number = 0;
+	channel: number = 0;
 
 	readBytes(stream: ReadStream): void
 	{

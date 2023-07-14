@@ -1,4 +1,4 @@
-import ReadStream from "../src/ReadStream";
+import ReadStream from "../src/streams/ReadStream";
 import File from "../src/File";
 
 const getBufferFromValue = value => {
@@ -76,7 +76,7 @@ test("Reads VLV", () => {
 
 });
 
-/*test("Reads test file", () => {
+test("Reads test file", () => {
 
 	const fs		= require("fs");
 	const file		= fs.readFileSync("./tests/D_RUNNIN.mid");
@@ -85,4 +85,4 @@ test("Reads VLV", () => {
 
 	midi.readBytes(stream);
 
-});*/
+});

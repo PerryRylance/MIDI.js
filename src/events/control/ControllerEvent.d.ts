@@ -1,6 +1,6 @@
 import ReadStream from "../../streams/ReadStream";
 import ControlEvent from "./ControlEvent";
-declare enum ControllerType {
+export declare enum ControllerType {
     BANK_SELECT_COARSE = 0,
     MODULATION_WHEEL_COARSE = 1,
     BREATH_CONTROLLER_COARSE = 2,
@@ -76,4 +76,3 @@ export default class ControllerEvent extends ControlEvent {
     value: number;
     readBytes(stream: ReadStream): void;
 }
-export {};

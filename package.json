@@ -1,4 +1,6 @@
 {
+	"name": "midi.js",
+	"author": "Perry Rylance",
 	"scripts": {
 		"dev": "npx tsc --watch",
 		"test": "jest"

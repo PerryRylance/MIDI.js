@@ -11,6 +11,6 @@ export declare enum ControlEventType {
     PITCH_WHEEL = 224
 }
 export default abstract class ControlEvent extends Event {
-    protected channel: number;
+    channel: number;
     constructor(delta?: number, channel?: number);
 }
