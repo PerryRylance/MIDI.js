@@ -1,3 +1,4 @@
+import WriteStream from "../../streams/WriteStream";
 import Event from "../Event";
 export declare enum ControlEventType {
     NOTE_OFF = 128,
@@ -13,4 +14,6 @@ export declare enum ControlEventType {
 export default abstract class ControlEvent extends Event {
     channel: number;
     constructor(delta?: number, channel?: number);
+    protected abstract getTypeHibyte(): number;
+    protected writeType(stream: WriteStream): void;
 }

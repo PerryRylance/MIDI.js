@@ -1,5 +1,6 @@
 import ReadStream from "../../streams/ReadStream";
-import ControlEvent from "./ControlEvent";
+import WriteStream from "../../streams/WriteStream";
+import ControlEvent, { ControlEventType } from "./ControlEvent";
 
 export enum ControllerType
 {
@@ -83,5 +84,18 @@ export default class ControllerEvent extends ControlEvent
 	{
 		this.controller = stream.readByte();
 		this.value = stream.readByte();
+	}
+
+	writeBytes(stream: WriteStream): void
+	{
+		super.writeBytes(stream);
+
+		stream.writeByte(this.controller);
+		stream.writeByte(this.value);
+	}
+
+	protected getTypeHibyte(): number
+	{
+		return ControlEventType.CONTROLLER;
 	}
 }

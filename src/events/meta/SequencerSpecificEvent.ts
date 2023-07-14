@@ -1,6 +1,7 @@
 import ReadStream from "../../streams/ReadStream";
-import MetaEvent from "./MetaEvent";
+import MetaEvent, { MetaEventType } from "./MetaEvent";
 import DeviceManufacturer from "../../DeviceManufacturer";
+import WriteStream from "../../streams/WriteStream";
 
 export default class SequencerSpecificEvent extends MetaEvent
 {
@@ -16,5 +17,22 @@ export default class SequencerSpecificEvent extends MetaEvent
 
 		for(let i = 1; i < length; i++)
 			this.bytes[i] = stream.readByte();
+	}
+
+	writeBytes(stream: WriteStream): void
+	{
+		super.writeBytes(stream);
+
+		stream.writeByte(this.bytes.length + 1); // NB: Add 1 for manufacturer
+
+		stream.writeByte(this.manufacturer);
+
+		for(let i = 0; i < this.bytes.length; i++)
+			stream.writeByte(this.bytes[i]);
+	}
+
+	protected getMetaType(): MetaEventType
+	{
+		return MetaEventType.SEQUENCER_SPECIFIC;
 	}
 }

@@ -1,6 +1,7 @@
 import ReadStream from "../../streams/ReadStream";
+import WriteStream from "../../streams/WriteStream";
 
-import MetaEvent from "./MetaEvent";
+import MetaEvent, { MetaEventType } from "./MetaEvent";
 
 export default class ChannelPrefixEvent extends MetaEvent
 {
@@ -11,5 +12,19 @@ export default class ChannelPrefixEvent extends MetaEvent
 		this.assertByteLength(stream, stream.readByte(), 1);
 
 		this.channel = stream.readByte();
+	}
+
+	writeBytes(stream: WriteStream): void
+	{
+		super.writeBytes(stream);
+
+		stream.writeByte(1);
+
+		stream.writeByte(this.channel);
+	}
+
+	protected getMetaType(): MetaEventType
+	{
+		return MetaEventType.CHANNEL_PREFIX;
 	}
 }

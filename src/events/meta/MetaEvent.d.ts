@@ -1,4 +1,5 @@
 import ReadStream from "../../streams/ReadStream";
+import WriteStream from "../../streams/WriteStream";
 import Event from "../Event";
 export declare enum MetaEventType {
     SEQUENCE_NUMBER = 0,
@@ -20,4 +21,6 @@ export declare enum MetaEventType {
 }
 export default abstract class MetaEvent extends Event {
     protected assertByteLength(stream: ReadStream, actual: number, expected: number): void;
+    protected writeType(stream: WriteStream): void;
+    protected abstract getMetaType(): MetaEventType;
 }

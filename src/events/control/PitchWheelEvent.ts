@@ -1,5 +1,5 @@
 import ReadStream from "../../streams/ReadStream";
-import ControlEvent from "./ControlEvent";
+import ControlEvent, { ControlEventType } from "./ControlEvent";
 import ParseError from "../../exceptions/ParseError";
 
 export default class PitchWheelEvent extends ControlEvent
@@ -17,6 +17,12 @@ export default class PitchWheelEvent extends ControlEvent
 		this.value = ((second & 0x7F) << 7) | (first & 0x7F);
 	}
 
+	protected getTypeHibyte(): number
+	{
+		return ControlEventType.PITCH_WHEEL;
+	}
+
+	// TODO: Test this out please, do we need remapping eg for exponent
 	get amount(): number
 	{
 		if(this.value <= 0x2000)

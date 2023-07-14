@@ -1,7 +1,8 @@
 import ParseError from "../../exceptions/ParseError";
 import ReadStream from "../../streams/ReadStream";
+import WriteStream from "../../streams/WriteStream";
 
-import MetaEvent from "./MetaEvent";
+import MetaEvent, { MetaEventType } from "./MetaEvent";
 
 export enum Rate {
 	FPS_24		= 0x0,
@@ -33,6 +34,7 @@ export default class SmtpeOffsetEvent extends MetaEvent
 		// NB: The five hhhhh bits define the hours of the SMPTE time.
 		this.hours = byte & 0x1F;
 
+		// TOOD: Remove this once we have parameter handling..
 		switch(this.rate)
 		{
 			case Rate.FPS_24:
@@ -49,5 +51,24 @@ export default class SmtpeOffsetEvent extends MetaEvent
 		this.seconds	= stream.readByte();
 		this.frames		= stream.readByte();
 		this.subframes	= stream.readByte();
+	}
+
+	writeBytes(stream: WriteStream): void
+	{
+		super.writeBytes(stream);
+
+		stream.writeByte(5);
+
+		stream.writeByte(((this.rate << 5) & 0x60) | (this.hours & 0x1F));
+
+		stream.writeByte(this.minutes);
+		stream.writeByte(this.seconds);
+		stream.writeByte(this.frames);
+		stream.writeByte(this.subframes);
+	}
+
+	protected getMetaType(): MetaEventType
+	{
+		return MetaEventType.SMPTE_OFFSET;
 	}
 }

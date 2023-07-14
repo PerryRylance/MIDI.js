@@ -1,3 +1,4 @@
+import WriteStream from "../../streams/WriteStream";
 import Event, { EventType } from "../Event";
 
 export enum ControlEventType {
@@ -25,5 +26,12 @@ export default abstract class ControlEvent extends Event
 		super(delta);
 
 		this.channel = channel;
+	}
+
+	protected abstract getTypeHibyte(): number;
+
+	protected writeType(stream: WriteStream): void
+	{
+		stream.writeByte( this.getTypeHibyte() | this.channel );
 	}
 }

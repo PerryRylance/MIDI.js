@@ -1,6 +1,7 @@
 import ReadStream from "../../streams/ReadStream";
+import WriteStream from "../../streams/WriteStream";
 
-import MetaEvent from "./MetaEvent";
+import MetaEvent, { MetaEventType } from "./MetaEvent";
 
 export default class PortPrefixEvent extends MetaEvent
 {
@@ -11,5 +12,19 @@ export default class PortPrefixEvent extends MetaEvent
 		this.assertByteLength(stream, stream.readByte(), 1);
 
 		this.port = stream.readByte();
+	}
+
+	writeBytes(stream: WriteStream): void
+	{
+		super.writeBytes(stream);
+
+		stream.writeByte(1);
+
+		stream.writeByte(this.port);
+	}
+
+	protected getMetaType(): MetaEventType
+	{
+		return MetaEventType.PORT_PREFIX;
 	}
 }

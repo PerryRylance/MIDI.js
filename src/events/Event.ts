@@ -1,4 +1,5 @@
 import ReadStream from "../streams/ReadStream";
+import WriteStream from "../streams/WriteStream";
 
 export enum EventType {
 	CONTROL = 0,
@@ -16,5 +17,14 @@ export default abstract class Event
 	}
 
 	abstract readBytes(stream: ReadStream): void;
+	protected abstract writeType(stream: WriteStream): void;
+	
+	writeBytes(stream: WriteStream): void
+	{
+		stream.writeVLV(this.delta);
+		this.writeType(stream);
+	}
+
+
 	// abstract toString(): string;
 }

@@ -1,4 +1,5 @@
 import ReadStream from "../../streams/ReadStream";
+import WriteStream from "../../streams/WriteStream";
 import ControlEvent from "./ControlEvent";
 export declare enum ControllerType {
     BANK_SELECT_COARSE = 0,
@@ -75,4 +76,6 @@ export default class ControllerEvent extends ControlEvent {
     controller: ControllerType;
     value: number;
     readBytes(stream: ReadStream): void;
+    writeBytes(stream: WriteStream): void;
+    protected getTypeHibyte(): number;
 }

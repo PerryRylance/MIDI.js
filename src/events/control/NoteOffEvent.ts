@@ -1,15 +1,13 @@
 import ReadStream from "../../streams/ReadStream";
+import WriteStream from "../../streams/WriteStream";
 
-import ControlEvent from "./ControlEvent";
+import { ControlEventType } from "./ControlEvent";
+import NoteEvent from "./NoteEvent";
 
-export default class NoteOffEvent extends ControlEvent
+export default class NoteOffEvent extends NoteEvent
 {
-	key: number = 60;
-	velocity: number = 127;
-
-	readBytes(stream: ReadStream): void 
+	protected getTypeHibyte(): number
 	{
-		this.key = stream.readByte();
-		this.velocity = stream.readByte();
+		return ControlEventType.NOTE_OFF;
 	}
 }

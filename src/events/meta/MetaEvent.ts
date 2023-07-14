@@ -1,5 +1,6 @@
 import ParseError from "../../exceptions/ParseError";
 import ReadStream from "../../streams/ReadStream";
+import WriteStream from "../../streams/WriteStream";
 import Event, { EventType } from "../Event";
 
 export enum MetaEventType {
@@ -29,4 +30,12 @@ export default abstract class MetaEvent extends Event
 		if(actual !== expected)
 			throw new ParseError(stream, `Expected length to be ${expected} bytes`);
 	}
+
+	protected writeType(stream: WriteStream): void
+	{
+		stream.writeByte(EventType.META);
+		stream.writeByte(this.getMetaType());
+	}
+
+	protected abstract getMetaType(): MetaEventType;
 }

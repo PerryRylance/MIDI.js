@@ -1,6 +1,6 @@
 import ReadStream from "../../streams/ReadStream";
 
-import MetaEvent from "./MetaEvent";
+import MetaEvent, { MetaEventType } from "./MetaEvent";
 
 enum Quality
 {
@@ -20,5 +20,10 @@ export default class KeySignatureEvent extends MetaEvent
 
 		this.accidentals = stream.readByte();
 		this.quality = stream.readByte();
+	}
+
+	protected getMetaType(): MetaEventType
+	{
+		return MetaEventType.KEY_SIGNATURE;
 	}
 }

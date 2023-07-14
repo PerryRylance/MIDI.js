@@ -1,5 +1,6 @@
 import DeviceManufacturer from "../../DeviceManufacturer";
 import ReadStream from "../../streams/ReadStream";
+import WriteStream from "../../streams/WriteStream";
 import Event, { EventType } from "../Event";
 
 enum UniversalDevices {
@@ -25,5 +26,22 @@ export default class SysExEvent extends Event
 			buffer.push(byte);
 		
 		this.bytes = new Uint8Array(buffer);
+	}
+
+	writeBytes(stream: WriteStream): void
+	{
+		super.writeBytes(stream);
+
+		stream.writeByte(this.manufacturer);
+
+		for(let i = 0; i < this.bytes.length; i++)
+			stream.writeByte(this.bytes[i]);
+
+		stream.writeByte(0xF7);
+	}
+
+	protected writeType(stream: WriteStream): void
+	{
+		stream.writeByte(EventType.SYSEX);
 	}
 }

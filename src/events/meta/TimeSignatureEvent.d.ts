@@ -1,4 +1,4 @@
-import MetaEvent from "./MetaEvent";
+import MetaEvent, { MetaEventType } from "./MetaEvent";
 import ReadStream from "../../streams/ReadStream";
 export default class TimeSignatureEvent extends MetaEvent {
     private numerator;
@@ -6,4 +6,5 @@ export default class TimeSignatureEvent extends MetaEvent {
     private ticksPerMetronomeClick;
     private num32ndNotesPerBeat;
     readBytes(stream: ReadStream): void;
+    protected getMetaType(): MetaEventType;
 }

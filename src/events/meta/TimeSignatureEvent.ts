@@ -1,4 +1,4 @@
-import MetaEvent from "./MetaEvent";
+import MetaEvent, { MetaEventType } from "./MetaEvent";
 import ReadStream from "../../streams/ReadStream";
 
 export default class TimeSignatureEvent extends MetaEvent
@@ -16,5 +16,10 @@ export default class TimeSignatureEvent extends MetaEvent
 		this.denominator = stream.readByte();
 		this.ticksPerMetronomeClick = stream.readByte();
 		this.num32ndNotesPerBeat = stream.readByte();
+	}
+
+	protected getMetaType(): MetaEventType
+	{
+		return MetaEventType.TIME_SIGNATURE;
 	}
 }

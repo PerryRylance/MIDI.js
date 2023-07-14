@@ -1,4 +1,4 @@
-import WriteStream from "../src/WriteStream";
+import WriteStream from "../src/streams/WriteStream";
 
 const getValueFromBuffer = (buffer: ArrayBuffer, bytes: number) => {
 
