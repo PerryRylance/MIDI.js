@@ -12,6 +12,11 @@ export default class ReadStream extends Stream
 		this.dataView = new DataView(buffer);
 	}
 
+	getLength(): number
+	{
+		return this.dataView.byteLength;
+	}
+
 	readByte()
 	{
 		if(this.position >= this.dataView.byteLength)

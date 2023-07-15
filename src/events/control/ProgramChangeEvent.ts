@@ -1,6 +1,7 @@
 import ReadStream from "../../streams/ReadStream";
 import WriteStream from "../../streams/WriteStream";
 import ControlEvent, { ControlEventType } from "./ControlEvent";
+import { StatusBytes } from "../../streams/StatusBytes";
 
 export enum ProgramType
 {
@@ -143,9 +144,9 @@ export default class ProgramChangeEvent extends ControlEvent
 		this.program = stream.readByte();
 	}
 
-	writeBytes(stream: WriteStream): void
+	writeBytes(stream: WriteStream, status?: StatusBytes): void
 	{
-		super.writeBytes(stream);
+		super.writeBytes(stream, status);
 
 		stream.writeByte(this.program);
 	}

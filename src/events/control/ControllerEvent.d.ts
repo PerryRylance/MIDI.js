@@ -1,4 +1,5 @@
 import ReadStream from "../../streams/ReadStream";
+import { StatusBytes } from "../../streams/StatusBytes";
 import WriteStream from "../../streams/WriteStream";
 import ControlEvent from "./ControlEvent";
 export declare enum ControllerType {
@@ -76,6 +77,6 @@ export default class ControllerEvent extends ControlEvent {
     controller: ControllerType;
     value: number;
     readBytes(stream: ReadStream): void;
-    writeBytes(stream: WriteStream): void;
+    writeBytes(stream: WriteStream, status?: StatusBytes): void;
     protected getTypeHibyte(): number;
 }

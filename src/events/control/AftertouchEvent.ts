@@ -1,6 +1,6 @@
 import ReadStream from "../../streams/ReadStream";
 import WriteStream from "../../streams/WriteStream";
-
+import { StatusBytes } from "../../streams/StatusBytes";
 import ControlEvent, { ControlEventType } from "./ControlEvent";
 
 export default class AftertouchEvent extends ControlEvent
@@ -38,9 +38,9 @@ export default class AftertouchEvent extends ControlEvent
 		this.pressure = stream.readByte();
 	}
 
-	writeBytes(stream: WriteStream): void
+	writeBytes(stream: WriteStream, status?: StatusBytes): void
 	{
-		super.writeBytes(stream);
+		super.writeBytes(stream, status);
 
 		stream.writeByte(this.key);
 		stream.writeByte(this.pressure);

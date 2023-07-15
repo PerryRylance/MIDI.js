@@ -6,6 +6,7 @@ import Event from "./events/Event";
 import EventFactory from "./events/factories/EventFactory";
 import EndOfTrackEvent from "./events/meta/EndOfTrackEvent";
 import ControlEvent from "./events/control/ControlEvent";
+import UnsupportedTrackError from "./exceptions/UnsupportedTrackError";
 
 const MTrk		= 0x4D54726B;
 
@@ -16,7 +17,7 @@ export default class Track
 	readBytes(stream: ReadStream)
 	{
 		if(stream.readUint() !== MTrk)
-			throw new ParseError(stream, "Expected MTrk");
+			throw new UnsupportedTrackError(stream, "Expected MTrk, only MIDI tracks are supported presently");
 		
 		const chunkSize = stream.readUint();
 		const status: StatusBytes = [0, 0];
@@ -38,6 +39,8 @@ export default class Track
 			if(event instanceof EndOfTrackEvent)
 				eot = true;
 			
+			this.events.push(event);
+
 			bytes += stream.getPosition() - cursor;
 		}
 

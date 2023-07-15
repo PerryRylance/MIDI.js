@@ -9,6 +9,7 @@ import ControllerEvent from "../control/ControllerEvent";
 import ChannelAftertouchEvent from "../control/ChannelAftertouchEvent";
 import ProgramChangeEvent from "../control/ProgramChangeEvent";
 import PitchWheelEvent from "../control/PitchWheelEvent";
+import ParseControlEventError from "../../exceptions/ParseControlEventError";
 
 enum ControlEventType {
 	NOTE_OFF			= 0x80,
@@ -72,7 +73,7 @@ export default class ControlEventFactory
 				break;
 			
 			default:
-				throw new ParseError(stream, "Unknown control event type 0x" + (type as number).toString(16));
+				throw new ParseControlEventError(stream, "Invalid control event type 0x" + (type as number).toString(16));
 		}
 
 		result.readBytes(stream);

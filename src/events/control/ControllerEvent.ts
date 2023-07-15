@@ -1,4 +1,5 @@
 import ReadStream from "../../streams/ReadStream";
+import { StatusBytes } from "../../streams/StatusBytes";
 import WriteStream from "../../streams/WriteStream";
 import ControlEvent, { ControlEventType } from "./ControlEvent";
 
@@ -86,9 +87,9 @@ export default class ControllerEvent extends ControlEvent
 		this.value = stream.readByte();
 	}
 
-	writeBytes(stream: WriteStream): void
+	writeBytes(stream: WriteStream, status?: StatusBytes): void
 	{
-		super.writeBytes(stream);
+		super.writeBytes(stream, status);
 
 		stream.writeByte(this.controller);
 		stream.writeByte(this.value);

@@ -1,7 +1,8 @@
 import ReadStream from "./streams/ReadStream";
+import Track from "./Track";
 import WriteStream from "./streams/WriteStream";
 export default class File {
-    private tracks;
+    tracks: Track[];
     private format;
     private timeDivision;
     private readHeader;

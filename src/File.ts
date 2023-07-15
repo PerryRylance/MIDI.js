@@ -13,16 +13,22 @@ enum Format {
 
 export default class File
 {
-	private tracks: Track[] = [];
+	tracks: Track[] = [];
+	
 	private format: Format = 0;
 	private timeDivision: number = 480; // TODO: Support PPQ and FPS
 
 	private readHeader(stream: ReadStream): number
 	{
-		if(stream.readUint() !== MThd)
+		const signature = stream.readUint();
+
+		if(signature !== MThd)
 			throw new ParseError(stream, "Expected MThd");
 		
 		const size			= stream.readUint();
+
+		if(size !== 6)
+			throw new ParseError(stream, "Expected header size to be 6");
 
 		this.format			= stream.readShort();
 
@@ -30,10 +36,6 @@ export default class File
 
 		this.timeDivision	= stream.readShort();
 
-		if(size > 6)
-			for(let i = 0; i < size - 6; i++)
-				stream.readByte(); // TODO: Why are these bytes discarded? Make this code clearer please
-		
 		return numTracks;
 	}
 
@@ -50,12 +52,15 @@ export default class File
 
 			this.tracks.push(track);
 		}
+
+		if(stream.getPosition() < stream.getLength())
+			throw new ParseError(stream, "Unexpected data after parsing file");
 	}
 
 	writeBytes(stream: WriteStream)
 	{
 		stream.writeUint(MThd);
-		stream.writeUint(0x6); // TODO: Why? See above
+		stream.writeUint(0x6); // NB: Size of the following header
 
 		stream.writeShort(this.format);
 		stream.writeShort(this.tracks.length);

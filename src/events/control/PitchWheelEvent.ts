@@ -1,6 +1,8 @@
 import ReadStream from "../../streams/ReadStream";
 import ControlEvent, { ControlEventType } from "./ControlEvent";
 import ParseError from "../../exceptions/ParseError";
+import { StatusBytes } from "../../streams/StatusBytes";
+import WriteStream from "../../streams/WriteStream";
 
 export default class PitchWheelEvent extends ControlEvent
 {
@@ -15,6 +17,20 @@ export default class PitchWheelEvent extends ControlEvent
 			throw new ParseError(stream, "Expected first bit of first byte to be zero");
 
 		this.value = ((second & 0x7F) << 7) | (first & 0x7F);
+	}
+
+	writeBytes(stream: WriteStream, status?: StatusBytes): void
+	{
+		super.writeBytes(stream, status);
+
+		// NB: Internal		..012345 6789ABCD
+		// NB: Serialized	.789ABCD .0123456
+
+		const left	= (this.value & 0x7F);
+		const right	= (this.value & 0x3F80) >> 7;
+
+		stream.writeByte(left);
+		stream.writeByte(right);
 	}
 
 	protected getTypeHibyte(): number

@@ -1,6 +1,7 @@
 import ReadStream from "../../streams/ReadStream";
 import WriteStream from "../../streams/WriteStream";
 import ControlEvent from "./ControlEvent";
+import { StatusBytes } from "../../streams/StatusBytes";
 export declare enum ProgramType {
     ACOUSTIC_GRAND_PIANO = 0,
     BRIGHT_ACOUSTIC_PIANO = 1,
@@ -134,6 +135,6 @@ export declare enum ProgramType {
 export default class ProgramChangeEvent extends ControlEvent {
     program: ProgramType;
     readBytes(stream: ReadStream): void;
-    writeBytes(stream: WriteStream): void;
+    writeBytes(stream: WriteStream, status?: StatusBytes): void;
     protected getTypeHibyte(): number;
 }

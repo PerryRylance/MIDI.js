@@ -283,7 +283,7 @@ test("Serialize pitch wheel event", () => {
 	event.channel = 3;
 	event.value = 0x1CD4;
 
-	expect(doesOutputMatchByteArray(event, ByteArrays.PITCH_WHEEL));
+	expect(doesOutputMatchByteArray(event, ByteArrays.PITCH_WHEEL)).toBeTruthy();
 
 	event.amount = -1;
 
