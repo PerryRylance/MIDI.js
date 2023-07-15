@@ -1,3 +1,4 @@
+import { StatusBytes } from "../../streams/StatusBytes";
 import WriteStream from "../../streams/WriteStream";
 import Event, { EventType } from "../Event";
 
@@ -42,9 +43,20 @@ export default abstract class ControlEvent extends Event
 		this._channel = value;
 	}
 
-	protected writeType(stream: WriteStream): void
+	protected writeType(stream: WriteStream, status?: StatusBytes): void
 	{
-		stream.writeByte( this.getTypeHibyte() | this.channel );
+		const hibyte = this.getTypeHibyte();
+
+		if(status && (status[0] === hibyte && status[1] === this.channel))
+			return; // NB: Skip, status is the same
+
+		stream.writeByte( hibyte | this.channel );
+
+		if(status)
+		{
+			status[0] = hibyte;
+			status[1] = this.channel;
+		}
 	}
 
 	protected assertValidKey(value: number)

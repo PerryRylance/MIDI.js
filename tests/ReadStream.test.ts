@@ -75,15 +75,3 @@ test("Reads VLV", () => {
 	expect(readback).toBe(32768);
 
 });
-
-// TODO: Move elsewhere
-test("Reads test file", () => {
-
-	const fs		= require("fs");
-	const file		= fs.readFileSync("./tests/D_RUNNIN.mid");
-	const stream	= new ReadStream(file.buffer);
-	const midi		= new File();
-
-	midi.readBytes(stream);
-
-});

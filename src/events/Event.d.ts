@@ -1,4 +1,5 @@
 import ReadStream from "../streams/ReadStream";
+import { StatusBytes } from "../streams/StatusBytes";
 import WriteStream from "../streams/WriteStream";
 export declare enum EventType {
     CONTROL = 0,
@@ -9,10 +10,10 @@ export default abstract class Event {
     private _delta;
     constructor(delta?: number);
     abstract readBytes(stream: ReadStream): void;
-    protected abstract writeType(stream: WriteStream): void;
+    protected abstract writeType(stream: WriteStream, status?: StatusBytes): void;
     get delta(): number;
     set delta(value: number);
-    writeBytes(stream: WriteStream): void;
+    writeBytes(stream: WriteStream, status?: StatusBytes): void;
     protected assertPositiveInteger(value: number): void;
     protected assertValidDelta(value: number): void;
     protected assertValidChannel(channel: number): void;

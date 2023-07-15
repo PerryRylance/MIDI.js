@@ -3,6 +3,8 @@ import { getReadStreamFromBytes } from "./ReadStreamUtils";
 import EventByteArrays from "./EventByteArrays";
 import EventFactory from "../src/events/factories/EventFactory";
 import NoteOnEvent from "../src/events/control/NoteOnEvent";
+import Track from "../src/Track";
+import WriteStream from "../src/streams/WriteStream";
 
 test("Parse C Major triad with running status", () => {
 
@@ -32,5 +34,32 @@ test("Parse C Major triad with running status", () => {
 	expect(g.channel).toBe(0);
 	expect(g.key).toBe(67);
 	expect(g.velocity).toBe(127);
+
+});
+
+test("Serialize C Major triad has running status", () => {
+
+	const track = new Track();
+	const stream = new WriteStream();
+
+	for(const key of [60, 64, 67])
+	{
+		const event		= new NoteOnEvent();
+		event.key		= key;
+		event.velocity	= 127;
+
+		track.events.push(event);
+	}
+
+	track.writeBytes(stream);
+
+	const buffer = stream.toArrayBuffer();
+	const view = new Uint8Array(buffer.slice(8)); // NB: Slice off MTrk and chunk size
+	const expected = EventByteArrays.RUNNING_C_MAJOR_TRIAD;
+
+	expect(view.byteLength).toBe(expected.length);
+
+	for(let i = 0; i < view.byteLength; i++)
+		expect(view[i]).toBe(expected[i]);
 
 });

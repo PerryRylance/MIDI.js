@@ -1,3 +1,4 @@
+import { StatusBytes } from "../../streams/StatusBytes";
 import WriteStream from "../../streams/WriteStream";
 import Event from "../Event";
 export declare enum ControlEventType {
@@ -17,7 +18,7 @@ export default abstract class ControlEvent extends Event {
     protected abstract getTypeHibyte(): number;
     get channel(): number;
     set channel(value: number);
-    protected writeType(stream: WriteStream): void;
+    protected writeType(stream: WriteStream, status?: StatusBytes): void;
     protected assertValidKey(value: number): void;
     protected assertValidVelocityLike(value: number): void;
 }

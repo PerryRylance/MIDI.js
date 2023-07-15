@@ -53,6 +53,17 @@ export default class WriteStream extends Stream
 		}
 	}
 
+	seekTo(position: number): void
+	{
+		if(!Number.isInteger(position))
+			throw new TypeError("Position must be an integer");
+
+		if(position < 0 || position > this.buffer.length)
+			throw new RangeError("Cannot seek to 0x" + position.toString(16));
+		
+		this.position = position;
+	}
+
 	toArrayBuffer(): ArrayBuffer
 	{
 		const buffer = new ArrayBuffer(this.buffer.length);

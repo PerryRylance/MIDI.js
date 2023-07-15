@@ -1,4 +1,5 @@
 import ReadStream from "../streams/ReadStream";
+import { StatusBytes } from "../streams/StatusBytes";
 import WriteStream from "../streams/WriteStream";
 
 export enum EventType {
@@ -17,7 +18,7 @@ export default abstract class Event
 	}
 
 	abstract readBytes(stream: ReadStream): void;
-	protected abstract writeType(stream: WriteStream): void;
+	protected abstract writeType(stream: WriteStream, status?: StatusBytes): void;
 
 	get delta(): number
 	{
@@ -31,12 +32,11 @@ export default abstract class Event
 		this._delta = value;
 	}
 	
-	writeBytes(stream: WriteStream): void
+	writeBytes(stream: WriteStream, status?: StatusBytes): void
 	{
 		stream.writeVLV(this.delta);
-		this.writeType(stream);
+		this.writeType(stream, status);
 	}
-
 
 	// abstract toString(): string;
 

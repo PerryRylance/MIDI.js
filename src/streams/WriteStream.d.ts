@@ -6,6 +6,7 @@ export default class WriteStream extends Stream {
     writeShort(value: number): void;
     writeUint(value: number): void;
     writeVLV(value: number): void;
+    seekTo(position: number): void;
     toArrayBuffer(): ArrayBuffer;
     toDataURL(): string;
 }
