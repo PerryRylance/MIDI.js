@@ -1,6 +1,7 @@
 import ReadStream from "./streams/ReadStream";
 import Track from "./Track";
 import ParseError from "./exceptions/ParseError";
+import WriteStream from "./streams/WriteStream";
 
 const MThd = 0x4D546864;
 
@@ -49,5 +50,18 @@ export default class File
 
 			this.tracks.push(track);
 		}
+	}
+
+	writeBytes(stream: WriteStream)
+	{
+		stream.writeUint(MThd);
+		stream.writeUint(0x6); // TODO: Why? See above
+
+		stream.writeShort(this.format);
+		stream.writeShort(this.tracks.length);
+		stream.writeShort(this.timeDivision);
+
+		for(const track of this.tracks)
+			track.writeBytes(stream);
 	}
 }

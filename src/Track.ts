@@ -31,6 +31,9 @@ export default class Track
 
 			cursor	= stream.getPosition();
 			event	= EventFactory.fromStream(stream, status);
+
+			if(!(event instanceof ControlEvent))
+				status[0] = status[1] = 0; // NB: Not on a control event, reset status bytes
 			
 			if(event instanceof EndOfTrackEvent)
 				eot = true;

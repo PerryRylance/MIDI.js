@@ -31,8 +31,6 @@ export default class EventFactory
 				result = ControlEventFactory.fromStream(stream, type, delta, status);
 				break;
 		}
-
-		// TODO: Do we need to reset status bytes if not on a control event?
 		
 		return result;
 	}
